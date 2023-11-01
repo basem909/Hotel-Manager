@@ -15,9 +15,9 @@ class Reservation < ApplicationRecord
   def check_in_is_before_check_out
     return if check_in.nil? || check_out.nil?
 
-    if check_in >= check_out
-      errors.add(:check_in, 'must be before check-out')
-    end
+    return unless check_in >= check_out
+
+    errors.add(:check_in, 'must be before check-out')
   end
 
   # Custom validation to prevent overlapping reservations for the same room
@@ -25,21 +25,21 @@ class Reservation < ApplicationRecord
     return if room.nil? || check_in.nil? || check_out.nil?
 
     overlapping_reservations = Reservation
-      .where(room_id: room_id)
-      .where.not(id: id) # Exclude self if updating
+      .where(room_id:)
+      .where.not(id:) # Exclude self if updating
       .where('check_in < ? AND check_out > ?', check_out, check_in)
 
-    if overlapping_reservations.exists?
-      errors.add(:base, 'Overlapping reservation for the same room')
-    end
+    return unless overlapping_reservations.exists?
+
+    errors.add(:base, 'Overlapping reservation for the same room')
   end
 
   # Custom validation to prevent reservations in the past
   def check_in_is_not_in_past
     return if check_in.nil?
 
-    if check_in < Date.today
-      errors.add(:check_in, 'must not be in the past')
-    end
+    return unless check_in < Date.today
+
+    errors.add(:check_in, 'must not be in the past')
   end
 end
