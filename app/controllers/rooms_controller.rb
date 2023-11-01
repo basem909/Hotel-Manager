@@ -1,7 +1,12 @@
 class RoomsController < ApplicationController
   before_action :set_room, only: [:show, :update, :destroy]
+  before_action :authenticate_user!, only: [:create, :update, :destroy]
+  load_and_authorize_resource
 
   def index
+    pp '---' * 100
+    pp current_user.role
+    pp '---'*100
     @rooms = Room.all
     room_count = @rooms.count
     render json: @rooms, each_serializer: RoomSerializer, status: :ok, count: room_count

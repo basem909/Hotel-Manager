@@ -3,10 +3,11 @@
 class ReservationsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_reservation, only: [:show, :update, :destroy]
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   def index
     @reservations = current_user.reservations
-    render json: @reservations, status: :ok
+    render json: @reservations, each_serializer: ReservationSerializer, status: :ok
   end
 
   def show
@@ -44,6 +45,10 @@ class ReservationsController < ApplicationController
 
   def set_reservation
     @reservation = current_user.reservations.find(params[:id])
+  end
+
+  def record_not_found
+    render json: { error: 'Record not found', message: "Please check your input!" }, status: :not_found
   end
 
   def reservation_params
