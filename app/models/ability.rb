@@ -4,7 +4,7 @@ class Ability
   def initialize(user)
     can :read, Room, public: true
 
-    return unless user.present? # additional permissions for logged in users (they can read their own posts)
+    return unless user.present? # additional permissions for logged in users
 
     can :read, Room
     can :manage, Reservation, user_id: user.id

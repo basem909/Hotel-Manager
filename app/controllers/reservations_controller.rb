@@ -1,12 +1,17 @@
 # app/controllers/api/v1/reservations_controller.rb
 
 class ReservationsController < ApplicationController
+  load_and_authorize_resource
   before_action :authenticate_user!
   before_action :set_reservation, only: %i[show update destroy]
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   def index
-    @reservations = current_user.reservations
+    if current_user.admin?
+      @reservations = Reservation.all
+    else
+      @reservations = current_user.reservations
+    end
     render json: @reservations, each_serializer: ReservationSerializer, status: :ok
   end
 
@@ -44,14 +49,10 @@ class ReservationsController < ApplicationController
   private
 
   def set_reservation
-    @reservation = current_user.reservations.find(params[:id])
-  end
-
-  def record_not_found
-    render json: { error: 'Record not found', message: 'Please check your input!' }, status: :not_found
+    @reservation = current_user.admin? ? Reservation.find(params[:id]) : current_user.reservations.find(params[:id])
   end
 
   def reservation_params
-    params.permit(:check_in, :check_out)
+    params.permit(:check_in, :check_out, :id)
   end
 end

@@ -1,6 +1,7 @@
 class RoomsController < ApplicationController
   before_action :set_room, only: %i[show update destroy]
   before_action :authenticate_user!, only: %i[create update destroy]
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
   load_and_authorize_resource
 
   def index
