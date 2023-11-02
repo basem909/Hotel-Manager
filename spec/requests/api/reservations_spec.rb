@@ -13,7 +13,7 @@ describe 'Reservations API' do
           check_in: { type: :string },
           check_out: { type: :string }
         },
-        required: ['user_id', 'room_id', 'check_in', 'check_out']
+        required: %w[user_id room_id check_in check_out]
       }
 
       response '201', 'reservation created' do
@@ -66,7 +66,7 @@ describe 'Reservations API' do
           check_in: { type: :string },
           check_out: { type: :string }
         },
-        required: ['user_id', 'room_id', 'check_in', 'check_out']
+        required: %w[user_id room_id check_in check_out]
       }
 
       response '200', 'reservation updated' do

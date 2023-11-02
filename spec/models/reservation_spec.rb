@@ -6,8 +6,8 @@ RSpec.describe Reservation, type: :model do
     room = create(:room)
 
     reservation = Reservation.new(
-      user: user,
-      room: room,
+      user:,
+      room:,
       check_in: Date.today,
       check_out: Date.tomorrow
     )
@@ -19,7 +19,7 @@ RSpec.describe Reservation, type: :model do
     room = create(:room)
 
     reservation = Reservation.new(
-      room: room,
+      room:,
       check_in: Date.today,
       check_out: Date.tomorrow
     )
@@ -31,7 +31,7 @@ RSpec.describe Reservation, type: :model do
     user = create(:user)
 
     reservation = Reservation.new(
-      user: user,
+      user:,
       check_in: Date.today,
       check_out: Date.tomorrow
     )
@@ -44,8 +44,8 @@ RSpec.describe Reservation, type: :model do
     room = create(:room)
 
     reservation = Reservation.new(
-      user: user,
-      room: room,
+      user:,
+      room:,
       check_out: Date.tomorrow
     )
 
@@ -57,8 +57,8 @@ RSpec.describe Reservation, type: :model do
     room = create(:room)
 
     reservation = Reservation.new(
-      user: user,
-      room: room,
+      user:,
+      room:,
       check_in: Date.today
     )
 

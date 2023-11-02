@@ -7,11 +7,11 @@ class ReservationsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   def index
-    if current_user.admin?
-      @reservations = Reservation.all
-    else
-      @reservations = current_user.reservations
-    end
+    @reservations = if current_user.admin?
+                      Reservation.all
+                    else
+                      current_user.reservations
+                    end
     render json: @reservations, each_serializer: ReservationSerializer, status: :ok
   end
 
