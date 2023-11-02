@@ -72,9 +72,6 @@ ruby bin/rspec
 ```
 ## Documentation
 
-https://user-images.githubusercontent.com/92399469/197322063-0143ec6b-2f69-4b45-809b-ab02e6dbb579.mp4
-
-
 ## Authors
 
 👤 Bassem Shams
