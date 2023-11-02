@@ -42,6 +42,7 @@ gem 'image_processing', '~> 1.2'
 gem 'cancancan'
 
 gem 'rubocop', '>= 1.0', '< 2.0'
+gem 'rswag'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem "rack-cors"
 

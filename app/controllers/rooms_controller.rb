@@ -5,9 +5,6 @@ class RoomsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    pp '---' * 100
-    pp current_user.role
-    pp '---' * 100
     @rooms = Room.all
     room_count = @rooms.count
     render json: @rooms, each_serializer: RoomSerializer, status: :ok, count: room_count
