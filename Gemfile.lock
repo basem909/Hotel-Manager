@@ -78,6 +78,9 @@ GEM
     bootsnap (1.17.0)
       msgpack (~> 1.2)
     builder (3.2.4)
+    bullet (7.1.2)
+      activesupport (>= 3.0.0)
+      uniform_notifier (~> 1.11)
     cancancan (3.5.0)
     case_transform (0.2)
       activesupport
@@ -250,6 +253,7 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.5.0)
+    uniform_notifier (1.16.0)
     warden (1.2.9)
       rack (>= 2.0.9)
     websocket-driver (0.7.6)
@@ -264,6 +268,7 @@ DEPENDENCIES
   active_model_serializers
   bcrypt (~> 3.1.19)
   bootsnap
+  bullet
   cancancan
   debug
   devise (~> 4.9.3)
